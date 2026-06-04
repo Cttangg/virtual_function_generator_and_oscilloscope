@@ -12,10 +12,7 @@ function_maker_and_oscilloscope_project/
 ├── empty.c                          # MCU 固件主程序
 ├── Debug/
 │   ├── ti_msp_dl_config.h           # SysConfig 生成的驱动配置头文件
-│   ├── ti_msp_dl_config.c           # SysConfig 生成的驱动初始化代码
-│   └── makefile                     # CCS 构建脚本
-├── targetConfigs/
-│   └── MSPM0G3507.ccxml             # J-Link 调试器配置
+│   └── ti_msp_dl_config.c           # SysConfig 生成的驱动初始化代码
 │
 ├── merged_workbench.py              # 【推荐】统一工作台 (函数发生器 + 示波器双标签)
 ├── function_generator_mcu_control.py # 独立函数发生器上位机 (v3.0 二进制流式)
@@ -40,7 +37,6 @@ function_maker_and_oscilloscope_project/
 | 自动转发 | 每收到一帧合法 DAC 数据，立即回传确认 |
 | ADC 数据上传 | 主循环批量打包 11 字节紧凑帧，通过 UART TX 发送 |
 | 状态上报 | 每秒输出一行调试信息 (发送帧数/丢点数/坏帧数) |
-| DMA 波表播放 | 支持 DMA 自动循环 256 点波表 (备用模式) |
 
 ### PC 上位机 (merged_workbench.py)
 
@@ -61,8 +57,6 @@ function_maker_and_oscilloscope_project/
 | ADC12_0 | **PA27** | 模拟电压采集 (0–3.3V, 12-bit) |
 | UART0 TX | **PA10** | 串口发送 (MCU → PC) |
 | UART0 RX | **PA11** | 串口接收 (PC → MCU) |
-| SWCLK | PA20 | J-Link 调试时钟 |
-| SWDIO | PA19 | J-Link 调试数据 |
 
 ### 闭环测试接线
 
@@ -161,7 +155,7 @@ pip install pyserial pyqt5 pyqtgraph numpy
 
 ```bash
 # 修改 uart_test.py 中的 COM_PORT 为实际串口号
-python uart_test.py
+py -3.10 uart_test.py
 ```
 
 预期输出：收到 MCU 的 Ready 消息，发送测试帧后收到回传确认。
@@ -180,7 +174,7 @@ python uart_test.py
 ### 4. 运行统一工作台
 
 ```bash
-python merged_workbench.py
+py -3.10 merged_workbench.py
 ```
 
 1. 选择串口 → 点击连接
@@ -241,11 +235,11 @@ python merged_workbench.py
 
 ```bash
 # 串口回环压测
-python uart_test.py
+py -3.10 uart_test.py
 
 # 统一工作台
-python merged_workbench.py
+py -3.10 merged_workbench.py
 
 # 独立函数发生器
-python function_generator_mcu_control.py
+py -3.10 function_generator_mcu_control.py
 ```
