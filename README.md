@@ -47,6 +47,28 @@ function_maker_and_oscilloscope_project/
 
 ---
 
+## 界面截图
+
+### 信号发生器 (Function Generator)
+
+![信号发生器](pictures/fun_gene.png)
+
+4 通道独立配置，支持正弦波/方波/三角波/锯齿波/直流/噪声，频率 1–1000 Hz，幅值 0–4095 (0–3.3V)。右侧为静态波形预览，支持水平/垂直缩放。
+
+### 数字示波器 — AUTO 滚动模式
+
+![示波器 AUTO 模式](pictures/oscill_auto.png)
+
+AUTO (Rolling) 模式下，4 通道波形连续向右滚动，自动追踪最新数据。支持 VOLTS/DIV 和 TIME/DIV 独立调节。底部显示 MCU 实时回传的 DAC 值和运行状态。
+
+### 数字示波器 — NORMAL 触发模式
+
+![示波器 NORMAL 模式](pictures/oscill_manual.png)
+
+NORMAL (Trig'd) 模式下，波形在触发点冻结。支持上升沿/下降沿触发，触发电平可调 (0–3.3V)。触发源可选 CH1–CH4，多通道波形在触发点精确对齐。
+
+---
+
 ## 硬件连接
 
 ### 引脚分配
